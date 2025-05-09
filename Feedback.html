@@ -116,14 +116,14 @@
     </nav>
 
     <form id="myform" action="https://formsubmit.co/julichhalston@gmail.com" method="POST" onsubmit="generateMadLib(event)">
-        <label for="message">What was your favorite part about my website?</label><br>
-        <textarea id="message" name="message" rows="5"></textarea><br>
+        <label for="favPart">What was your favorite part about my website?</label><br>
+        <textarea id="favPart" name="favPart" rows="5"></textarea><br>
 
-        <label for="dogbreeds">What was your least favorite?</label><br>
-        <textarea id="dogbreeds" name="dogbreeds" rows="5"></textarea><br>
+        <label for="leastFav">What was your least favorite?</label><br>
+        <textarea id="leastFav" name="leastFav" rows="5"></textarea><br>
 
-        <label for="days">Favorite pet:</label>
-        <select id="days" name="days">
+        <label for="favPet">Favorite pet:</label>
+        <select id="favPet" name="favPet">
             <option value="Slinky">Slinky</option>
             <option value="Kirky">Kirky</option>
             <option value="Koa">Koa</option>
@@ -157,30 +157,31 @@
 
     <script>
         function generateMadLib(event) {
-    event.preventDefault();
+            event.preventDefault();
 
-    let favoritePart = document.getElementById('message').value;
-    let leastFavorite = document.getElementById('dogbreeds').value;
-    let favoritePet = document.getElementById('days').value;
-    let favPage = document.querySelector('input[name="favPage"]:checked')?.value || "No page selected";
-    let favproject = Array.from(document.querySelectorAll('input[name="favproject"]:checked')).map(checkbox => checkbox.value);
+            let favoritePart = document.getElementById('favPart').value;
+            let leastFavorite = document.getElementById('leastFav').value;
+            let favoritePet = document.getElementById('favPet').value;
+            let favPage = document.querySelector('input[name="favPage"]:checked')?.value || "No page selected";
+            let favproject = Array.from(document.querySelectorAll('input[name="favproject"]:checked')).map(checkbox => checkbox.value);
 
-    document.getElementById('resultText').innerHTML = `
-        Thank you for visiting my website! Here's what you shared:<br><br>
-        Favorite part: ${favoritePart}.<br>
-        Least favorite: ${leastFavorite}.<br>
-        Favorite pet: ${favoritePet}.<br>
-        Favorite page: ${favPage}.<br>
-        Favorite project(s): ${favproject.join(", ")}.<br>
-        Thank you for the feedback!
-    `;
+            document.getElementById('resultText').innerHTML = `
+                Thank you for visiting my website! Here's what you shared:<br><br>
+                Favorite part: ${favoritePart}.<br>
+                Least favorite: ${leastFavorite}.<br>
+                Favorite pet: ${favoritePet}.<br>
+                Favorite page: ${favPage}.<br>
+                Favorite project(s): ${favproject.join(", ")}.<br>
+                Thank you for the feedback!
+            `;
 
-    
-    setTimeout(() => {
-        document.getElementById('myform').submit();
-    }, 1000); 
-}
-
+            setTimeout(() => {
+                // Adding redirect after form submission
+                document.getElementById('myform').action = "https://formsubmit.co/julichhalston@gmail.com";
+                document.getElementById('myform').setAttribute('method', 'POST');
+                document.getElementById('myform').submit();
+            }, 1000); // Delay of 1 second before redirection
+        }
     </script>
 </body>
 </html>
