@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Final Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        body {
+            background-image: url(retro.gif);
+            background-size: cover; 
+            background-position: center; 
+            font-family: "Comic Sans MS", cursive, sans-serif;  
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            display: inline-block;
+            padding: 10px;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        form {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        form label {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        form textarea, form select, form input[type="radio"], form input[type="checkbox"] {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            background-color: #333;
+            color: white;
+        }
+
+        form input[type="radio"], form input[type="checkbox"] {
+            width: auto;
+            margin: 5px 10px 5px 0;
+        }
+
+        form input[type="submit"] {
+            background-color: #ff6347;
+            color: white;
+            font-size: 18px;
+            padding: 12px 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #ff4500;
+        }
+
+        h2 {
+            color: white;
+            margin-top: 20px;
+        }
+
+        #resultText {
+            color: aqua;
+            font-size: 18px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            margin: 20px auto;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="AboutMe.html">About Me</a></li>
+            <li><a href="PastProjects.html">Past Projects</a></li>
+            <li><a href="LearningCS.html">Learning CS</a></li>
+            <li><a href="PetPage.html">My Pets</a></li>
+            <li><a href="Feedback.html">Feedback</a></li>
+        </ul>
+    </nav>
+
+    <form id="myform" action="https://formsubmit.co/julichhalston@gmail.com" method="POST" onsubmit="generateMadLib(event)">
+        <label for="message">What was your favorite part about my website?</label><br>
+        <textarea id="message" name="message" rows="5"></textarea><br>
+
+        <label for="dogbreeds">What was your least favorite?</label><br>
+        <textarea id="dogbreeds" name="dogbreeds" rows="5"></textarea><br>
+
+        <label for="days">Favorite pet:</label>
+        <select id="days" name="days">
+            <option value="Slinky">Slinky</option>
+            <option value="Kirky">Kirky</option>
+            <option value="Koa">Koa</option>
+        </select><br>
+
+        <p>Select your favorite page:</p>
+        <input type="radio" id="About Me" name="favPage" value="About Me">
+        <label for="About Me">About Me</label><br>
+        <input type="radio" id="PastProjects" name="favPage" value="PastProjects">
+        <label for="PastProjects">Past Projects</label><br>
+        <input type="radio" id="LearningCS" name="favPage" value="LearningCS">
+        <label for="LearningCS">Learning CS</label><br>
+        <input type="radio" id="Pets" name="favPage" value="Pets">
+        <label for="Pets">Pets</label><br>
+
+        <p>Select your favorite projects:</p>
+        <input type="checkbox" id="1" name="favproject" value="Project One(TV Difficulty Screen)">
+        <label for="1">Project One (TV Difficulty Screen)</label><br>
+        <input type="checkbox" id="2" name="favproject" value="Project Two(TV Reboot)">
+        <label for="2">Project Two (TV Reboot)</label><br>
+        <input type="checkbox" id="3" name="favproject" value="Project Three (DVD pumpkin)">
+        <label for="3">Project Three (DVD pumpkin)</label><br>
+        <input type="checkbox" id="4" name="favproject" value="Project Four (interactive spongebob)">
+        <label for="4">Project Four (interactive spongebob)</label><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Feedback:</h2>
+    <p id="resultText"></p>
+
+    <script>
+        function generateMadLib(event) {
+    event.preventDefault();
+
+    let favoritePart = document.getElementById('message').value;
+    let leastFavorite = document.getElementById('dogbreeds').value;
+    let favoritePet = document.getElementById('days').value;
+    let favPage = document.querySelector('input[name="favPage"]:checked')?.value || "No page selected";
+    let favproject = Array.from(document.querySelectorAll('input[name="favproject"]:checked')).map(checkbox => checkbox.value);
+
+    document.getElementById('resultText').innerHTML = `
+        Thank you for visiting my website! Here's what you shared:<br><br>
+        Favorite part: ${favoritePart}.<br>
+        Least favorite: ${leastFavorite}.<br>
+        Favorite pet: ${favoritePet}.<br>
+        Favorite page: ${favPage}.<br>
+        Favorite project(s): ${favproject.join(", ")}.<br>
+        Thank you for the feedback!
+    `;
+
+    
+    setTimeout(() => {
+        document.getElementById('myform').submit();
+    }, 1000); 
+}
+
+    </script>
+</body>
+</html>
